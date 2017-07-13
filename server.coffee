@@ -154,6 +154,9 @@ process_url = (url, transferredHeaders, resp, remaining_redirects) ->
           when 304
             srcResp.destroy()
             resp.writeHead srcResp.statusCode, newHeaders
+          when 404, 403, 402, 401, 400
+            srcResp.destroy()
+            resp.writeHead srcResp.statusCode, newHeaders
           else
             contentType = newHeaders['content-type']
 
