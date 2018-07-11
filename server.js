@@ -97,7 +97,7 @@
       if (url.protocol === 'https:') {
         Protocol = Https;
       } else if (url.protocol === 'http:') {
-        Protocol = Http;
+        Protocol = Https;
       } else {
         four_oh_four(resp, "Unknown protocol", url);
         return;
