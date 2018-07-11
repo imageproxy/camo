@@ -91,7 +91,8 @@
 
   process_url = function(url, transferredHeaders, resp, remaining_redirects) {
     var Protocol, queryPath, requestOptions, srcReq;
-    debug_log("Start proccessing URL" + url);
+    debug_log("Start proccessing URL" + url.host);
+    debug_log("Protocol: " + url.protocol + " port: " + protocol.port);
     if (url.host != null) {
       if (url.protocol === 'https:') {
         Protocol = Https;
