@@ -229,10 +229,12 @@
       });
       resp.on('close', function() {
         error_log("Request aborted");
+        finish(resp);
         return srcReq.abort();
       });
       return resp.on('error', function(e) {
         error_log("Request error: " + e);
+        finish(resp);
         return srcReq.abort();
       });
     } else {

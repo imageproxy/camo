@@ -191,10 +191,12 @@ process_url = (url, transferredHeaders, resp, remaining_redirects) ->
 
     resp.on 'close', ->
       error_log("Request aborted")
+      finish resp
       srcReq.abort()
 
     resp.on 'error', (e) ->
       error_log("Request error: #{e}")
+      finish resp
       srcReq.abort()
   else
     four_oh_four(resp, "No host found " + url.host, url)
