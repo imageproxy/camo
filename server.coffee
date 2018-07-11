@@ -62,6 +62,7 @@ finish = (resp, str) ->
   resp.connection && resp.end str
 
 process_url = (url, transferredHeaders, resp, remaining_redirects) ->
+  debug_log "Start proccessing URL" + url
   if url.host?
     if url.protocol is 'https:'
       Protocol = Https
@@ -95,6 +96,7 @@ process_url = (url, transferredHeaders, resp, remaining_redirects) ->
       content_length = srcResp.headers['content-length']
 
       if content_length > content_length_limit
+        debug_log "Content length exceeded"
         srcResp.destroy()
         four_oh_four(resp, "Content-Length exceeded", url)
       else
@@ -135,6 +137,7 @@ process_url = (url, transferredHeaders, resp, remaining_redirects) ->
           if is_finished
             finish resp
 
+        debug_log "Code: " + srcResp.statusCode
         switch srcResp.statusCode
           when 301, 302, 303, 307
             srcResp.destroy()
@@ -178,6 +181,7 @@ process_url = (url, transferredHeaders, resp, remaining_redirects) ->
             srcResp.pipe resp
 
     srcReq.setTimeout (socket_timeout * 1000), ->
+      debug_log "Aborting due to timeout"
       srcReq.abort()
       four_oh_four resp, "Socket timeout", url
 
