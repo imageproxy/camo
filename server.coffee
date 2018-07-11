@@ -63,7 +63,7 @@ finish = (resp, str) ->
 
 process_url = (url, transferredHeaders, resp, remaining_redirects) ->
   debug_log "Start proccessing URL" + url.host
-  debug_log "Protocol: " + url.protocol + " port: " + protocol.port
+  debug_log "Protocol: " + url.protocol + " port: " + url.port
   if url.host?
     if url.protocol is 'https:'
       Protocol = Https
